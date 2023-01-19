@@ -1,0 +1,43 @@
+<app-poke-search (emmitSearch)="getEmmitSearchValue($event)" />
+
+<section
+  class="listagem"
+  infinite-scroll
+  [infiniteScrollDistance]="scrollDistance"
+  [infiniteScrollThrottle]="throttle"
+  (scrolled)="onScrollDown()">
+
+  <ng-template ngFor let-pokemon [ngForOf]="allPokemons">
+    <a [routerLink]="['details', pokemon.status.id]" class="pokemon" *ngIf="pokemon.status; else template">
+      <section class="pokemon__status">
+        <h2>{{ pokemon.name }}</h2>
+
+        <ul *ngFor="let value of pokemon.status.types">
+          <li>{{ value.type.name }}</li>
+        </ul>
+      </section>
+
+      <section class="pokemon__image">
+        <img [src]="pokemon.status.sprites.other.dream_world.front_default" [alt]="pokemon.name">
+      </section>
+    </a>
+
+    <ng-template #template>
+      <a [routerLink]="['details', pokemon.id]" class="pokemon" *ngIf="pokemon.id">
+        <section class="pokemon__status">
+          <h2>{{ pokemon.name }}</h2>
+      
+          <ul *ngFor="let value of pokemon.types">
+            <li>{{ value.type.name }}</li>
+          </ul>
+        </section>
+      
+        <section class="pokemon__image">
+          <img [src]="pokemon.sprites.other.dream_world.front_default" [alt]="pokemon.name">
+        </section>
+      </a>
+    </ng-template>
+  </ng-template>
+</section>
+
+<img class="img__error" src="assets/error.png" alt="Deu erro na mostragem do pokémon" width="100%" *ngIf="apiError">

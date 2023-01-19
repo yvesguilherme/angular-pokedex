@@ -1,0 +1,16 @@
+@import './config-scss/variables.scss';
+@import './config-scss/reset.scss';
+@import './config-scss/rem-calc.scss';
+@import './config-scss/btn.scss';
+@import './config-scss/animation.scss';
+
+html {
+  background-color: var(--primary-color);
+  font-family: 'Roboto', sans-serif;
+}
+
+main {
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: rem-calc(600);
+}
